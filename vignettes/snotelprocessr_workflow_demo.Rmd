@@ -1,0 +1,142 @@
+---
+title: "snotelprocessr_workflow_demo"
+author: "Ally Detre"
+date: "2025-02-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Welcome to snotelprocessr!
+
+Thanks for using snotelprocessr! This package was designed for the large-scale processing of SNOTEL station data. If you have any questions about use or troubleshooting, feel free to email me, Ally Detre, at a.detre\@colostate.edu.
+
+The following will include a sample workflow for downloading, processing, and exporting SNOTEL station data:
+
+## Download (daily) raw SNOTEL data:
+
+```{r}
+# Supply the function with a tibble of state/site IDs:
+df <- tibble(site = c(531, 335, 505, 485, 802),
+state = c("CO" ,"CO", "CO", "CO", "CO"))
+
+# Set your output directory
+snotel_dir = "path/to/directory"
+
+# Using walk2, from purrr package for a tibble/df of sites:
+walk2(.x = df$site, .y = df$state, ~snotel_downloader_daily(site = .x, state=.y,
+start_date = "2013-01-01", end_date = "2015-12-31", save_dir = snotel_dir))
+
+### Note that this downloads daily data, hourly data can be accessed with snotel_downloader_hourly
+```
+
+Great! Now we have our daily data, but it needs some cleaning up.
+
+## Process raw SNOTEL data:
+
+```{r}
+# First, define input and output folders:
+
+# input: where raw data is located
+input_folder <- "your/input/path"
+
+# output: where processed data will go
+output_folder <- "your/output/path"
+
+# Create output folder if it doesn't exist
+if (!dir.exists(output_folder)) {
+  dir.create(output_folder, recursive = TRUE)
+}
+```
+
+Now that we've set up folder paths, it's time to process the data with a for loop that effectively grabs every CSV file in your input folder and renames the columns, converts to metric units, calculates derivatives and densities, and identifies soil moisture pulses. Note: the parameters fed into soil moisture pulse detection can be changed!
+
+```{r}
+
+# List csv files in input_folder
+file_list <- list.files(input_folder, pattern = "\\.csv$", full.names = TRUE)
+
+for (file_path in file_list) {
+  # Read CSV
+  df <- read.csv(file_path, fileEncoding = "UTF-8")
+  
+  # Apply processing functions (from snotelprocessr)
+  df <- df %>%
+    snotel_rename_col_daily()
+  
+  # Remove years with only NA values in soilm_p2 column
+  ### comment out these lines if soil moisture is not a concern
+  df <- df %>%
+    group_by(year) %>%
+    filter(!all(is.na(soilm_p2))) %>%
+    ungroup()
+  
+  # Apply rest of processing functions (from snotelprocessr)
+  df <- df %>%
+    snotel_metric() %>%
+    snotel_density_calculation() %>%
+    fill(soilm_p2, .direction = "down") %>%  # Down fill any NAs in soil moisture before derivative calculations
+    snotel_derivative(soilm_p2)
+  
+  # Find DOY of peak SWE
+  df <- df %>%
+    group_by(year) %>%
+    mutate(
+      peak_swe = ifelse(any(!is.na(swe) & doy <= 182), doy[which.max(ifelse(doy <= 182, swe, NA_real_))], NA_real_)
+    ) %>%
+    ungroup()
+  
+  # Find soil moisture pulse dates for each year
+  ### ***CHANGE PARAMS AS NEEDED*** ###
+  pulse_results <- snotel_detect_smpulse(
+    df = df, 
+    soil_moisture_col = "soilm_p2", 
+    doy_col = "doy", 
+    year_col = "year", 
+    swe_col = "swe", 
+    min_swe_window_before = 70, 
+    max_swe_window_after = 30,
+    variability_multiplier = 1.25, 
+    derivative_length = 2
+  )
+  
+  # Merge pulse results df back into the main df
+  df <- df %>%
+    left_join(pulse_results, by = "year") %>%
+    mutate(sm_pulse_flag = if_else(doy == doy_pulse, 1, 0, missing = 0)) %>%  # Create binary column for pulse DOY
+    select(-doy_pulse)  # Remove the doy_pulse column
+  
+  # Create output filename
+  base_name <- sub("\\.csv$", "", basename(file_path))
+  output_path <- file.path(output_folder, paste0(base_name, "_processed.csv"))
+  
+  # Write processed SNOTEL data to output folder
+  write.csv(df, output_path, row.names = FALSE)
+}
+```
+
+Now that we have processed data, we can handle the SNOTEL data with ease. You can check out the following R scripts in the "vignettes" folder for further processing and analysis:
+
+-   extract_snotel_peak_swe.R
+
+    -   Extract peak SWE day of year (DOY) from your processed SNOTEL data. Returns a CSV file with peak SWE DOY for each year/station
+
+-   extract_snotel_soilmoisture_pulse.R
+
+    -   Extract soil moisture pulse DOY from your processed SNOTEL data. Returns a CSV file with soil moisture DOY for each year/station
+
+-   export_snotel_soilmoisture_plots.R
+
+    -   Create and export faceted plots for your processed SNOTEL data. These plots will show soil moisture curves with plotted pulse dates, in addition to SWE and derivative curves for context:
+
+        ![](images/CO_531.png)
+
+-   compute_snotel_snowfree.R
+
+    -   Computes snow presence and snow-free DOY based on observations of snow depth.
+
+-   compute_50p_peakSWE_window.R
+
+    -   Computes 50% peak SWE DOY for each year (in other words- what DOYs the SWE curve crosses 50% of peak SWE)
