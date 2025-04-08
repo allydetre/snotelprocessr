@@ -4,7 +4,7 @@
 snotelprocessr was created to download, process, and analyze large
 amounts of SNOTEL data at once. The scripts and functions included can
 be used for a single station, or hundreds at once. Within the
-“vignettes” folder you can find example .R scripts for various
+“examples” folder you can find example .R scripts for various
 processing and analysis workflows, in addition to the
 snotelprocessr_workflow_demo.Rmd, which will walk you through
 downloading raw data and processing it for future analyses. 
