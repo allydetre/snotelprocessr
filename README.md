@@ -7,7 +7,8 @@ be used for a single station, or hundreds at once. Within the
 “vignettes” folder you can find example .R scripts for various
 processing and analysis workflows, in addition to the
 snotelprocessr_workflow_demo.Rmd, which will walk you through
-downloading raw data and processing it for future analyses.
+downloading raw data and processing it for future analyses. 
+The "R" folder contains all necessary functions for running through analysis and data downloading workflows.
 
 ## Included example scripts:
 
