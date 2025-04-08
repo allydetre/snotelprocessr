@@ -13,8 +13,11 @@ snotel_metadata(site_codes = NULL, states = NULL)
 }
 \value{
 dataframe with metadata for desired SNOTEL sites
-
-#' @examples
+}
+\description{
+Get metadata for SNOTEL stations in the western U.S.
+}
+\examples{
 \dontrun{
 # Select by site code:
 site_1267 <- snotel_metadata(site_codes = c("1267"))
@@ -23,9 +26,7 @@ site_1267 <- snotel_metadata(site_codes = c("1267"))
 state_co <- snotel_metadata(states = c("CO"))
 
 # Select full metadata file for all sites/states:
-full_metadata <- snotel_metadata()
+full_metadata <- snotel_metadata(site_codes = NULL, states = NULL)
 }
-}
-\description{
-Get metadata for SNOTEL stations in the western U.S.
+
 }

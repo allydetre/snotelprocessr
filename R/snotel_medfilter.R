@@ -6,18 +6,18 @@
 #' @param n median filtering factor (a number)
 #' @return median filtered column in specified dataframe
 #' 
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' # Load your dataframe
 #' data(snotel_000)
 #' 
 #' # Run median filter on specified column, here we are choosing density with n = 3:
-#' snotel_000 <- snotel_medfilter(density, 3)
+#' CO_335_sample %>%
+#'   mutate(density_medfilter = snotel_medfilter(density_calc, n = 3))
 #' 
 #' }
 #' 
 #'@import dplyr
-#'@import stats
 #' @export
 
 snotel_medfilter <- function(x,n){

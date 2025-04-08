@@ -17,7 +17,7 @@
 #' snotel_dir = "path/to/directory"
 #' 
 #' # Downloading data for one site, UT-907 for example:
-#' snotel_downloader(site = "907", state = "UT", start_date = "2013-01-01", 
+#' snotel_downloader_daily(site = "907", state = "UT", start_date = "2013-01-01", 
 #' end_date = "2014-08-01", save_dir = snotel_dir)
 #' 
 #' # Downloading data for multiple sites:
@@ -32,7 +32,8 @@
 #' 
 #' }
 #'@import dplyr
-#'@import stats
+#'@import utils
+#'@import readr
 #' @export
 snotel_downloader_daily <- function(site, state, start_date, end_date, save_dir){
   
@@ -47,7 +48,7 @@ snotel_downloader_daily <- function(site, state, start_date, end_date, save_dir)
                        state,
                        ":SNTL%257Cid=%2522%2522%257Cname/",
                        start_date, ",", end_date,
-                       "/WTEQ::value,SNWD::value,PRCP::value,TOBS::value,SMS:-2:value,SMS:-4:value,SMS:-8:value,SMS:-20:value,SMS:-40:value?fitToScreen=false")
+                       "/WTEQ::value,SNWD::value,PRCP::value,TOBS::value,TMAX::value,TAVG::value,SMS:-2:value,SMS:-4:value,SMS:-8:value,SMS:-20:value,SMS:-40:value?fitToScreen=false")
   
   # Path to save the temporary file
   #temp_file <- file.path(save_dir, paste0(site, "_", state, "_tmp.csv"))
@@ -91,5 +92,5 @@ snotel_downloader_daily <- function(site, state, start_date, end_date, save_dir)
   final_file <- file.path(save_dir, paste0(state, "_", site, ".csv"))
   
   # Write the dataframe to CSV
-  write_csv(df, final_file)
+  write.csv(df, final_file)
 }

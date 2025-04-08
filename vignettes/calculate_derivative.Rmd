@@ -1,0 +1,40 @@
+---
+title: "calculate_derivative"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{calculate_derivative}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(snotelprocessr)
+library(dplyr)
+```
+
+## Calculating the derivative of a column
+
+We can use the derivative to look at rate of change over time. The following example calculates a 1-day lag difference (n - n+1) for the column 'soilm_p4' (soil moisture % at 4" depth):
+
+```{r}
+# Load your dataframe
+file_path <- system.file("extdata", "CO_335_sample.csv", package = "snotelprocessr")
+
+CO_335_sample <- read.csv(file_path)
+
+# Calculate derivative for 'soilm_p4' column
+CO_335_sample <- CO_335_sample %>%
+  snotel_derivative(soilm_p4)
+```
+
+```{r}
+# Look at the data:
+head(CO_335_sample)
+```

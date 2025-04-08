@@ -6,7 +6,7 @@
 #' @param states Two-letter state code
 #' @return dataframe with metadata for desired SNOTEL sites
 #' 
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' # Select by site code:
 #' site_1267 <- snotel_metadata(site_codes = c("1267"))
@@ -15,11 +15,12 @@
 #' state_co <- snotel_metadata(states = c("CO"))
 #' 
 #' # Select full metadata file for all sites/states:
-#' full_metadata <- snotel_metadata()
+#' full_metadata <- snotel_metadata(site_codes = NULL, states = NULL)
 #' }
 #' 
 #'@import dplyr
-#'@import stats
+#'@import rvest
+#'@import stringr
 #' @export
 snotel_metadata <- function(site_codes = NULL, states = NULL) {
   # NRCS SNOTEL metadata URL

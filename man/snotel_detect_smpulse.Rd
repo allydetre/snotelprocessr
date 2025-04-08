@@ -27,13 +27,13 @@ snotel_detect_smpulse(
 
 \item{swe_col}{column containing SWE}
 
+\item{min_swe_window_before}{define number of days before peak SWE that the algorithm should search for a pulse}
+
 \item{max_swe_window_after}{define number of days after peak SWE that the algorithm should search for a pulse}
 
 \item{variability_multiplier}{define standard deviation multiplier (higher multipliers will look for bigger pulses, lower multipliers will look for smaller pulses)}
 
 \item{derivative_length}{define forward-looking derivative length (longer length will smooth the derivaive more, while shorter length will smooth the derivative less)}
-
-\item{min_swe_mindow_before}{define number of days before peak SWE that the algorithm should search for a pulse}
 }
 \value{
 dataframe with DOY of soil moisture pulse for all available years

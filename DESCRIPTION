@@ -1,15 +1,20 @@
 Package: snotelprocessr
 Type: Package
-Title: SNOTEL Processing
-Version: 0.1.0
+Title: snotelprocessr
+Version: 1.0.0
 Author: Ally Detre
 Maintainer: Ally Detre <a.detre@colostate.edu>
-Description: Package designed for mass downloading, cleaning, and processing of SNOTEL data
+Description: Tools designed for the mass downloading, cleaning, and processing of SNOTEL data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: tidyverse, purrr, lubridate, rvest, stringr, httr
+Imports: lubridate, readr, rvest, httr, rlang, dplyr, stringr
 RoxygenNote: 7.3.1
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

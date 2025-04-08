@@ -1,0 +1,54 @@
+---
+title: "snotel_get_metadata"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{snotel_get_metadata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(snotelprocessr)
+library(rvest)
+library(dplyr)
+library(stringr)
+```
+
+## Get metadata for one or more SNOTEL stations
+
+For a single site:
+
+```{r}
+# Select by site code:
+site_1267 <- snotel_metadata(site_codes = "1267")
+
+# Look at the metadata:
+head(site_1267)
+```
+
+For a state:
+
+```{r}
+# Select by state:
+state_co <- snotel_metadata(states = c("CO"))
+
+# Look at the metadata:
+head(state_co)
+```
+
+For all SNOTEL stations:
+
+```{r}
+# Select full metadata file for all sites/states:
+full_metadata <- snotel_metadata(site_codes = NULL, states = NULL)
+
+# Look at the metadata:
+head(full_metadata)
+```

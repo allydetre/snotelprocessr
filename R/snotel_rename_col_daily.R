@@ -12,7 +12,7 @@
 #' @return Dataframe with renamed columns
 #' 
 #'@import dplyr
-#'@import stats
+#'@import lubridate
 #' @export
 
 snotel_rename_col_daily <- function(df, rename_map=NULL) {
@@ -25,6 +25,8 @@ snotel_rename_col_daily <- function(df, rename_map=NULL) {
       "snow_depth" = "Snow.Depth..in..Start.of.Day.Values",
       "precip" = "Precipitation.Increment..in.",
       "airtemp" = "Air.Temperature.Observed..degF..Start.of.Day.Values",
+      "airtemp_max" = "Air.Temperature.Maximum..degF.",
+      "airtemp_avg" = "Air.Temperature.Average..degF.",
       "soilm_p2" = "Soil.Moisture.Percent..2in..pct..Start.of.Day.Values",
       "soilm_p4" = "Soil.Moisture.Percent..4in..pct..Start.of.Day.Values",
       "soilm_p8" = "Soil.Moisture.Percent..8in..pct..Start.of.Day.Values",

@@ -3,6 +3,8 @@
 #' This function calculates density from SWE and snow depth.  
 #'
 #' @param df dataframe
+#' @param swe column containing swe
+#' @param snow_depth column containing snow depth
 #' @return column containing calculated density values
 
 #' @examples
@@ -16,7 +18,6 @@
 #' }
 #'
 #'@import dplyr
-#'@import stats
 
 #' @export
 

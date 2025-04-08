@@ -8,6 +8,10 @@ snotel_density_calculation(df, swe, snow_depth)
 }
 \arguments{
 \item{df}{dataframe}
+
+\item{swe}{column containing swe}
+
+\item{snow_depth}{column containing snow depth}
 }
 \value{
 column containing calculated density values

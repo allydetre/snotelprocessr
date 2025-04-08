@@ -1,2 +1,7 @@
 ^README\.Rmd$
 ^LICENSE\.md$
+^doc$
+^Meta$
+^data-raw$
+^examples/
+^\.gitignore$

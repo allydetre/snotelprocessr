@@ -1,0 +1,44 @@
+---
+title: "calculate_density"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{calculate_density}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(snotelprocessr)
+library(dplyr)
+```
+
+## Calculating Density
+
+Density can be calculated from SNOTEL data using snow depth and SWE using the following equation:
+
+Density = SWE / Snow Depth
+
+The following function calculates density according to this equation and converts the units to kg/m\^3, as is standard with NASA SnowEx field snowpit measurements.
+
+```{r}
+# Load your dataframe
+file_path <- system.file("extdata", "CO_335_sample.csv", package = "snotelprocessr")
+
+CO_335_sample <- read.csv(file_path)
+
+# Calculate density
+CO_335_sample <- CO_335_sample %>%
+  snotel_density_calculation()
+```
+
+```{r}
+# Look at the data:
+head(CO_335_sample)
+```

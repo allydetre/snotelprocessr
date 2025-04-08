@@ -12,7 +12,7 @@
 #' @return Dataframe with renamed columns
 #' 
 #'@import dplyr
-#'@import stats
+#'@import lubridate
 #' @export
 
 snotel_rename_col_hourly <- function(df, rename_map=NULL) {
@@ -25,6 +25,8 @@ snotel_rename_col_hourly <- function(df, rename_map=NULL) {
       "snow_depth" = "Snow.Depth..in.",
       "precip" = "Precipitation.Increment..in.",
       "airtemp" = "Air.Temperature.Observed..degF.",
+      "aitemp_max" = "Air.Temperature.Maximum..degF.",
+      "airtemp_avg" = "Air.Temperature.Average..degF.",
       "soilm_p2" = "Soil.Moisture.Percent..2in..pct.",
       "soilm_p4" = "Soil.Moisture.Percent..4in..pct.",
       "soilm_p8" = "Soil.Moisture.Percent..8in..pct.",
@@ -69,11 +71,11 @@ snotel_rename_col_hourly <- function(df, rename_map=NULL) {
   
   # create appropriate columns for time/date:
   df <- df %>%
-    rename(datetime = date)
-    mutate(date = ymd_hm(datetime),
+    rename(datetime = date)%>%
+    mutate(datetime = ymd_hm(datetime),
            date = as.Date(datetime),
            year = year(datetime),
-           hour = format(datetime, "%H:00"),
+           hour = hour(datetime),
            doy = yday(datetime))
   
   # Filter for only January through August:

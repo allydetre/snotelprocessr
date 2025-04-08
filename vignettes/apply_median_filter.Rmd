@@ -1,0 +1,42 @@
+---
+title: "apply_median_filter"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{apply_median_filter}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(snotelprocessr)
+library(dplyr)
+library(readr)
+library(utils)
+```
+
+## Applying a median filter
+
+Applying a median filter can be useful for filling in data gaps in the SNOTEL record or for smoothing data. The following example shows the application of a 3-day median filter on density.
+
+```{r}
+# Load your dataframe
+file_path <- system.file("extdata", "CO_335_sample.csv", package = "snotelprocessr")
+
+CO_335_sample <- read.csv(file_path)
+
+# Run median filter on specified column, here we are choosing density with n = 3:
+CO_335_sample <- CO_335_sample %>%
+  mutate(density_ = snotel_medfilter(density_calc, n = 3))
+```
+
+```{r}
+# Look at the data:
+head(CO_335_sample)
+```

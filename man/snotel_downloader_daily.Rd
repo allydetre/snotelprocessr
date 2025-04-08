@@ -31,7 +31,7 @@ accessing the NRCS report generator.
 snotel_dir = "path/to/directory"
 
 # Downloading data for one site, UT-907 for example:
-snotel_downloader(site = "907", state = "UT", start_date = "2013-01-01", 
+snotel_downloader_daily(site = "907", state = "UT", start_date = "2013-01-01", 
 end_date = "2014-08-01", save_dir = snotel_dir)
 
 # Downloading data for multiple sites:

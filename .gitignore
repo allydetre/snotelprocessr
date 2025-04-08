@@ -4,3 +4,10 @@
 .httr-oauth
 .DS_Store
 .quarto
+.README.md
+.README.html
+inst/doc
+/doc/
+/Meta/
+/data-raw/
+

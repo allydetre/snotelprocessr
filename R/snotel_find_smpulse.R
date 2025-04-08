@@ -8,7 +8,7 @@
 #' @param doy_col column containing DOY
 #' @param year_col column containing year
 #' @param swe_col column containing SWE
-#' @param min_swe_mindow_before define number of days before peak SWE that the algorithm should search for a pulse
+#' @param min_swe_window_before define number of days before peak SWE that the algorithm should search for a pulse
 #' @param max_swe_window_after define number of days after peak SWE that the algorithm should search for a pulse
 #' @param variability_multiplier define standard deviation multiplier (higher multipliers will look for bigger pulses, lower multipliers will look for smaller pulses)
 #' @param derivative_length define forward-looking derivative length (longer length will smooth the derivaive more, while shorter length will smooth the derivative less)
@@ -33,7 +33,6 @@
 #' }
 #'
 #'@import dplyr
-#'@import stats
 #' @export
 
 snotel_detect_smpulse <- function(df, soil_moisture_col, doy_col, year_col, swe_col,

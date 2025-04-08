@@ -9,7 +9,7 @@ snotel_derivative(df, col_name)
 \arguments{
 \item{df}{dataframe}
 
-\item{input_column}{Column from which the derivative is being computed from}
+\item{col_name}{Column from which the derivative is being computed from}
 }
 \value{
 Column with computed derivative

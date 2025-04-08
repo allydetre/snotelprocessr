@@ -13,17 +13,19 @@ snotel_medfilter(x, n)
 }
 \value{
 median filtered column in specified dataframe
-
-#' @examples
+}
+\description{
+This function runs a median filter on a column in a dataframe.
+}
+\examples{
 \dontrun{
 # Load your dataframe
 data(snotel_000)
 
 # Run median filter on specified column, here we are choosing density with n = 3:
-snotel_000 <- snotel_medfilter(density, 3)
+CO_335_sample \%>\%
+  mutate(density_medfilter = snotel_medfilter(density_calc, n = 3))
 
 }
-}
-\description{
-This function runs a median filter on a column in a dataframe.
+
 }
