@@ -28,7 +28,7 @@ The "R" folder contains all necessary functions for running through analysis and
     These plots will show soil moisture curves with plotted pulse dates,
     in addition to SWE and derivative curves for context:
 
-    <img src="images/CO_531.png" width="549" />
+    <img src="inst/images/CO_531.png" width="549" />
 
 - compute_snotel_snowfree.R
 
