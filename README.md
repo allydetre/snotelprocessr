@@ -4,10 +4,11 @@
 snotelprocessr was created to download, process, and analyze large
 amounts of SNOTEL data at once. The scripts and functions included can
 be used for a single station, or hundreds at once. Within the
-“vignettes” folder you can find example .R scripts for various
+“examples” folder you can find example .R scripts for various
 processing and analysis workflows, in addition to the
 snotelprocessr_workflow_demo.Rmd, which will walk you through
-downloading raw data and processing it for future analyses.
+downloading raw data and processing it for future analyses. 
+The "R" folder contains all necessary functions for running through analysis and data downloading workflows.
 
 ## Included example scripts:
 
@@ -41,11 +42,12 @@ downloading raw data and processing it for future analyses.
 
 ## Installing snotelprocessr
 
-You can install the development version (0.1.0) of snotelprocessr like
+You can install the latest version (1.0.0) of snotelprocessr like
 this:
 
 ``` r
-devtools::install_github("allydetre/snotelprocessr")
+devtools::install_github("allydetre/snotelprocessr", build_vignettes = TRUE)
+library("snotelprocessr")
 ```
 
 ## 
