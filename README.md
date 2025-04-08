@@ -42,7 +42,7 @@ The "R" folder contains all necessary functions for running through analysis and
 
 ## Installing snotelprocessr
 
-You can install the development version (0.1.0) of snotelprocessr like
+You can install the latest version (1.0.0) of snotelprocessr like
 this:
 
 ``` r
