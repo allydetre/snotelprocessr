@@ -46,7 +46,8 @@ You can install the development version (0.1.0) of snotelprocessr like
 this:
 
 ``` r
-devtools::install_github("allydetre/snotelprocessr")
+devtools::install_github("allydetre/snotelprocessr", build_vignettes = TRUE)
+library("snotelprocessr")
 ```
 
 ## 
