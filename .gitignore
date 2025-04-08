@@ -10,4 +10,6 @@ inst/doc
 /doc/
 /Meta/
 /data-raw/
+.Rbuildignore
+LICENSE.md
 

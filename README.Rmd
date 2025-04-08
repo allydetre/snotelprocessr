@@ -29,7 +29,7 @@ snotelprocessr was created to download, process, and analyze large amounts of SN
 
     -   Create and export faceted plots for your processed SNOTEL data. These plots will show soil moisture curves with plotted pulse dates, in addition to SWE and derivative curves for context:
 
-        ![](images/CO_531.png){width="549"}
+        ![](inst/images/CO_531.png)
 
 -   compute_snotel_snowfree.R
 
