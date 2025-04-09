@@ -1,6 +1,8 @@
 
 # Welcome to snotelprocessr!
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.15178610.svg)](http://dx.doi.org/10.5281/zenodo.15178610)
+
 snotelprocessr was created to download, process, and analyze large
 amounts of SNOTEL data at once. The scripts and functions included can
 be used for a single station, or hundreds at once. Within the
