@@ -40,7 +40,7 @@ The "R" folder contains all necessary functions for running through analysis and
 - compute_50p_peakSWE_window.R
 
   - Computes 50% peak SWE DOY for each year (in other words- what DOYs
-    the SWE curve crosses 50% of peak SWE)
+    the SWE curve cross 50% of peak SWE)
 
 ## Installing snotelprocessr
 
