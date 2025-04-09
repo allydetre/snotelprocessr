@@ -1,6 +1,6 @@
 Package: snotelprocessr
 Type: Package
-Title: snotelprocessr: Download and Process SNOTEL Snow and Soil Moisture Data
+Title: Download and Process SNOTEL (Snow Telemetry Station) Snow and Soil Moisture Data
 Version: 1.0.0
 Authors@R: person(given = "Ally",
                  family = "Detre",

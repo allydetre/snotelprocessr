@@ -21,5 +21,5 @@
 #' @export
 
 snotel_medfilter <- function(x,n){
-  runmed(x,n)
+  stats::runmed(x,n)
 }
