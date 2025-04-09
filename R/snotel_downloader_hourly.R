@@ -34,11 +34,8 @@
 #'
 #'@import dplyr
 #'@import utils
-#'@import readr
 #' @export
 
-
-#' @export
 snotel_downloader_hourly <- function(site, state, start_date, end_date, save_dir){
   
   # Ensure the save directory exists, if not, create it

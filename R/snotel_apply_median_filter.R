@@ -29,7 +29,6 @@
 #' }
 #'
 
-#'@import stats
 #'@import dplyr
 #' @export
 
@@ -48,12 +47,12 @@ snotel_apply_median_filter <- function(df, column_name, window_size, cleanup_dat
   df <- df %>%
     mutate(!!new_column_name := snotel_medfilter(!!column_name, window_size))
 
-  # Soil moisture-specific cleanup strategy
+  # Soil moisture-specific cleanup strategy - 4x SD
   df <- df %>%
     mutate(!!new_column_name := if_else(!!new_column_name < mean(!!new_column_name, na.rm = TRUE) - 
-                                          (4 * sd(!!new_column_name, na.rm = TRUE)), NA_real_,
+                                          (4 * stats::sd(!!new_column_name, na.rm = TRUE)), NA_real_,
                                         if_else(!!new_column_name > mean(!!new_column_name, na.rm = TRUE) + 
-                                                  (4 * sd(!!new_column_name, na.rm = TRUE)), NA_real_,
+                                                  (4 * stats::sd(!!new_column_name, na.rm = TRUE)), NA_real_,
                                                 !!new_column_name)))
 
   # Cleaning up specific dates, if necessary

@@ -56,7 +56,7 @@ snotel_detect_smpulse <- function(df, soil_moisture_col, doy_col, year_col, swe_
     calculated_derivative <- dplyr::lead(soil_moisture_values, derivative_length) - soil_moisture_values
     
     # Calculate dynamic threshold
-    dynamic_threshold <- variability_multiplier * sd(calculated_derivative, na.rm = TRUE)
+    dynamic_threshold <- variability_multiplier * stats::sd(calculated_derivative, na.rm = TRUE)
     
     # Determine peak SWE DOY before DOY 182 to avoid late-season noise
     if (all(is.na(swe_values)) || max(doy_values) < 182) {

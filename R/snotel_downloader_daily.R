@@ -33,7 +33,6 @@
 #' }
 #'@import dplyr
 #'@import utils
-#'@import readr
 #' @export
 snotel_downloader_daily <- function(site, state, start_date, end_date, save_dir){
   
